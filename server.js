@@ -7,10 +7,7 @@ const FormData = require("form-data");
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Enable CORS for all routes
 app.use(cors());
-
-// Parse JSON request bodies
 app.use(bodyParser.json());
 
 // Health check endpoint
@@ -18,10 +15,6 @@ app.get("/", (req, res) => {
   res.status(200).send("URL Shortener API is running");
 });
 
-/**
- * URL Shortening endpoint
- * Takes a URL and returns a shortened version using CleanURI
- */
 app.post("/api/shorten", async (req, res) => {
   try {
     const { url } = req.body;
