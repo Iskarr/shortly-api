@@ -15,6 +15,11 @@ app.get("/", (req, res) => {
   res.status(200).send("URL Shortener API is running");
 });
 
+// testing endpoint
+app.get("/testing", (req, res) => {
+  res.status(200).send("Working");
+});
+
 app.post("/api/shorten", async (req, res) => {
   try {
     const { url } = req.body;
