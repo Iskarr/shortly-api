@@ -1,26 +1,11 @@
-const express = require("express");
-const cors = require("cors");
 const axios = require("axios");
-const bodyParser = require("body-parser");
 const FormData = require("form-data");
 
-const app = express();
-const PORT = process.env.PORT || 3001;
+const awesomeFunction = (req, res, next) => {
+  res.json("Awesome Name!");
+};
 
-app.use(cors());
-app.use(bodyParser.json());
-
-// Health check endpoint
-app.get("/", (req, res) => {
-  res.status(200).send("URL Shortener API is running");
-});
-
-// testing endpoint
-app.get("/testing", (req, res) => {
-  res.status(200).send("Working");
-});
-
-app.post("/api/shorten", async (req, res) => {
+const shorten = async (req, res, next) => {
   try {
     const { url } = req.body;
 
@@ -70,14 +55,9 @@ app.post("/api/shorten", async (req, res) => {
       error: "An unexpected error occurred while shortening the URL",
     });
   }
-});
+};
 
-// Start the server
-app.listen(PORT, () => {
-  console.log(`URL Shortener server running on port ${PORT}`);
-});
-
-// Error handling for unhandled promises
-process.on("unhandledRejection", (error) => {
-  console.error("Unhandled Promise Rejection:", error);
-});
+module.exports = {
+  shorten,
+  awesomeFunction,
+};
